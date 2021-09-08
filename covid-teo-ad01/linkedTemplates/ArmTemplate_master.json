@@ -1,0 +1,154 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "covid-teo-ad01"
+		},
+		"ls_adls_teocovid_dl_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'ls_adls_teocovid_dl'"
+		},
+		"ls_asa_teocovid_sa_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_asa_teocovid_sa'"
+		},
+		"ls_adls_teocovid_dl_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://teocovidadls.dfs.core.windows.net"
+		},
+		"ls_http_ecdc_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "@{linkedService().baseURL}"
+		},
+		"tr_cases_deaths_properties_pl_ingest_ecdc_data_parameters_relativeURL": {
+			"type": "string",
+			"defaultValue": "covid19/nationalcasedeath/csv/data.csv"
+		},
+		"tr_cases_deaths_properties_pl_ingest_ecdc_data_parameters_filename": {
+			"type": "string",
+			"defaultValue": "cases_deaths.csv"
+		},
+		"tr_cases_deaths_properties_pl_ingest_ecdc_data_parameters_baseURL": {
+			"type": "string",
+			"defaultValue": "https://opendata.ecdc.europa.eu"
+		},
+		"tr_country_response_properties_pl_ingest_ecdc_data_parameters_relativeURL": {
+			"type": "string",
+			"defaultValue": "sites/default/files/documents/response_graphs_data_2021-08-26.csv"
+		},
+		"tr_country_response_properties_pl_ingest_ecdc_data_parameters_filename": {
+			"type": "string",
+			"defaultValue": "country_response.csv"
+		},
+		"tr_country_response_properties_pl_ingest_ecdc_data_parameters_baseURL": {
+			"type": "string",
+			"defaultValue": "https://www.ecdc.europa.eu"
+		},
+		"tr_hospital_admission_properties_pl_ingest_ecdc_data_parameters_relativeURL": {
+			"type": "string",
+			"defaultValue": "covid19/hospitalicuadmissionrates/csv/data.csv"
+		},
+		"tr_hospital_admission_properties_pl_ingest_ecdc_data_parameters_filename": {
+			"type": "string",
+			"defaultValue": "hospital_admission.csv"
+		},
+		"tr_hospital_admission_properties_pl_ingest_ecdc_data_parameters_baseURL": {
+			"type": "string",
+			"defaultValue": "https://opendata.ecdc.europa.eu"
+		},
+		"tr_testing_properties_pl_ingest_ecdc_data_parameters_relativeURL": {
+			"type": "string",
+			"defaultValue": "covid19/testing/csv/data.csv"
+		},
+		"tr_testing_properties_pl_ingest_ecdc_data_parameters_filename": {
+			"type": "string",
+			"defaultValue": "testing.csv"
+		},
+		"tr_testing_properties_pl_ingest_ecdc_data_parameters_baseURL": {
+			"type": "string",
+			"defaultValue": "https://opendata.ecdc.europa.eu"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "covid-teo-ad01_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"ls_adls_teocovid_dl_accountKey": {
+						"value": "[parameters('ls_adls_teocovid_dl_accountKey')]"
+					},
+					"ls_asa_teocovid_sa_connectionString": {
+						"value": "[parameters('ls_asa_teocovid_sa_connectionString')]"
+					},
+					"ls_adls_teocovid_dl_properties_typeProperties_url": {
+						"value": "[parameters('ls_adls_teocovid_dl_properties_typeProperties_url')]"
+					},
+					"ls_http_ecdc_properties_typeProperties_url": {
+						"value": "[parameters('ls_http_ecdc_properties_typeProperties_url')]"
+					},
+					"tr_cases_deaths_properties_pl_ingest_ecdc_data_parameters_relativeURL": {
+						"value": "[parameters('tr_cases_deaths_properties_pl_ingest_ecdc_data_parameters_relativeURL')]"
+					},
+					"tr_cases_deaths_properties_pl_ingest_ecdc_data_parameters_filename": {
+						"value": "[parameters('tr_cases_deaths_properties_pl_ingest_ecdc_data_parameters_filename')]"
+					},
+					"tr_cases_deaths_properties_pl_ingest_ecdc_data_parameters_baseURL": {
+						"value": "[parameters('tr_cases_deaths_properties_pl_ingest_ecdc_data_parameters_baseURL')]"
+					},
+					"tr_country_response_properties_pl_ingest_ecdc_data_parameters_relativeURL": {
+						"value": "[parameters('tr_country_response_properties_pl_ingest_ecdc_data_parameters_relativeURL')]"
+					},
+					"tr_country_response_properties_pl_ingest_ecdc_data_parameters_filename": {
+						"value": "[parameters('tr_country_response_properties_pl_ingest_ecdc_data_parameters_filename')]"
+					},
+					"tr_country_response_properties_pl_ingest_ecdc_data_parameters_baseURL": {
+						"value": "[parameters('tr_country_response_properties_pl_ingest_ecdc_data_parameters_baseURL')]"
+					},
+					"tr_hospital_admission_properties_pl_ingest_ecdc_data_parameters_relativeURL": {
+						"value": "[parameters('tr_hospital_admission_properties_pl_ingest_ecdc_data_parameters_relativeURL')]"
+					},
+					"tr_hospital_admission_properties_pl_ingest_ecdc_data_parameters_filename": {
+						"value": "[parameters('tr_hospital_admission_properties_pl_ingest_ecdc_data_parameters_filename')]"
+					},
+					"tr_hospital_admission_properties_pl_ingest_ecdc_data_parameters_baseURL": {
+						"value": "[parameters('tr_hospital_admission_properties_pl_ingest_ecdc_data_parameters_baseURL')]"
+					},
+					"tr_testing_properties_pl_ingest_ecdc_data_parameters_relativeURL": {
+						"value": "[parameters('tr_testing_properties_pl_ingest_ecdc_data_parameters_relativeURL')]"
+					},
+					"tr_testing_properties_pl_ingest_ecdc_data_parameters_filename": {
+						"value": "[parameters('tr_testing_properties_pl_ingest_ecdc_data_parameters_filename')]"
+					},
+					"tr_testing_properties_pl_ingest_ecdc_data_parameters_baseURL": {
+						"value": "[parameters('tr_testing_properties_pl_ingest_ecdc_data_parameters_baseURL')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
