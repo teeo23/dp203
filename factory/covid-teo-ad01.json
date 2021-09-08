@@ -1,0 +1,9 @@
+{
+	"name": "covid-teo-ad01",
+	"location": "uksouth",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "d795c523-74c1-44ee-a111-1a8699b06016",
+		"tenantId": "75cc7afc-cee4-45b2-b3cf-4975a8985363"
+	}
+}

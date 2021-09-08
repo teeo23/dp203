@@ -1,0 +1,29 @@
+{
+	"name": "tr_cases_deaths",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pl_ingest_ecdc_data",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"relativeURL": "covid19/nationalcasedeath/csv/data.csv",
+					"filename": "cases_deaths.csv",
+					"baseURL": "https://opendata.ecdc.europa.eu"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Hour",
+				"interval": 24,
+				"startTime": "2021-09-03T10:30:00",
+				"timeZone": "GMT Standard Time"
+			}
+		}
+	}
+}
